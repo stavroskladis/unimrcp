@@ -50,7 +50,7 @@ static apt_bool_t mrcp_app_sig_event_raise(mrcp_client_session_t *session, mrcp_
 static apt_bool_t mrcp_app_control_message_raise(mrcp_client_session_t *session, mrcp_channel_t *channel, mrcp_message_t *mrcp_message);
 static apt_bool_t mrcp_app_failure_message_raise(mrcp_client_session_t *session);
 static apt_bool_t mrcp_app_request_dispatch(mrcp_client_session_t *session, const mrcp_app_message_t *app_message);
-
+static apt_bool_t mrcp_client_session_terminate(mrcp_client_session_t *session);
 static apt_bool_t mrcp_client_resource_answer_process(mrcp_client_session_t *session, mrcp_session_descriptor_t *descriptor);
 static apt_bool_t mrcp_client_control_media_answer_process(mrcp_client_session_t *session, mrcp_session_descriptor_t *descriptor);
 static apt_bool_t mrcp_client_av_media_answer_process(mrcp_client_session_t *session, mrcp_session_descriptor_t *descriptor);
@@ -230,7 +230,7 @@ apt_bool_t mrcp_client_session_terminate_event_process(mrcp_client_session_t *se
 		mrcp_app_sig_event_raise(session,NULL);
 	}
 
-	return TRUE;
+	return mrcp_client_session_terminate(session);
 }
 
 apt_bool_t mrcp_client_session_control_response_process(mrcp_client_session_t *session, mrcp_message_t *message)
